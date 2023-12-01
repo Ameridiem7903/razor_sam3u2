@@ -102,7 +102,17 @@ void UserApp1Initialize(void)
     /* The task isn't properly initialized, so shut it down and don't run */
     UserApp1_pfStateMachine = UserApp1SM_Error;
   }
-
+  
+  // All discrete LEDs to off
+  LedOff(WHITE);
+  LedOff(PURPLE);
+  LedOff(BLUE);
+  LedOff(CYAN);
+  LedOff(GREEN);
+  LedOff(YELLOW);
+  LedOff(ORANGE);
+  LedOff(RED);
+  
 } /* end UserApp1Initialize() */
 
   
@@ -140,7 +150,96 @@ State Machine Function Definitions
 /* What does this state do? */
 static void UserApp1SM_Idle(void)
 {
+  static u16 u16BlinkCount = 0;
+  static u16 u16Counter = 200;
+  
+  u16BlinkCount++;
+  if(u16BlinkCount == 250)
+  {
+    u16BlinkCount = 0;
+        
+    // Parse the current count to set the LEDs. RED is bit 0, ORANGE is bit 1, YELLOW is bit 2, GREEN is bit 3
     
+    if(u16Counter & 0x01)
+    {
+      LedOn(RED);
+    }
+    else
+    {
+      LedOff(RED);
+    }
+    
+    if(u16Counter & 0x02)
+    {
+      LedOn(ORANGE);
+    }
+    else
+    {
+      LedOff(ORANGE);
+    }
+    
+    if(u16Counter & 0x04)
+    {
+      LedOn(YELLOW);
+    }
+    else
+    {
+      LedOff(YELLOW);
+    }
+    
+    if(u16Counter & 0x08)
+    {
+      LedOn(GREEN);
+    }
+    else
+    {
+      LedOff(GREEN);
+    }
+    
+    if(u16Counter & 0x10)
+    {
+      LedOn(CYAN);
+    }
+    else
+    {
+      LedOff(CYAN);
+    }
+    
+    if(u16Counter & 0x20)
+    {
+      LedOn(BLUE);
+    }
+    else
+    {
+      LedOff(BLUE);
+    }
+    
+    if(u16Counter & 0x40)
+    {
+      LedOn(PURPLE);
+    }
+    else
+    {
+      LedOff(PURPLE);
+    }
+    
+    if(u16Counter & 0x80)
+    {
+      LedOn(WHITE);
+    }
+    else
+    {
+      LedOff(WHITE);
+    }
+    
+    // Update the counter and roll at 255
+    u16Counter++;
+    if(u16Counter == 256)
+    {
+      u16Counter = 0;
+    }
+
+  } // end if(u16BlinkCount == 100)
 } /* end UserApp1SM_Idle() */
      
 
