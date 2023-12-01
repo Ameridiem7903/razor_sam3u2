@@ -232,7 +232,7 @@ static void UserApp1SM_Idle(void)
       LedOff(WHITE);
     }
     
-    // Update the counter and roll at 255
+    // Update the counter and roll at 256
     u16Counter++;
     if(u16Counter == 256)
     {
